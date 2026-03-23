@@ -1,0 +1,1 @@
+{"train_accuracy": 93.26, "test_accuracy": 92.93, "eval_f1_weighted": 92.98,"eval_loss": 0.3127, "eval_runtime": 21.809, "eval_samples_per_second": 147.141, "eval_steps_per_second": 18.433, "epoch": 6.0}
