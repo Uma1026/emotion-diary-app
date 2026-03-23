@@ -23,8 +23,8 @@ st.set_page_config(
 # ---------------- LOAD MODEL ----------------
 @st.cache_resource
 def load_all():
-    model = RobertaForSequenceClassification.from_pretrained("emotion_model")
-    tokenizer = RobertaTokenizer.from_pretrained("emotion_model")
+    model = RobertaForSequenceClassification.from_pretrained("uma0826/emotion-diary-model")
+    tokenizer = RobertaTokenizer.from_pretrained("uma0826/emotion-diary-model")
 
     with open("label_encoder.pkl", "rb") as f:
         label_encoder = pickle.load(f)
@@ -270,6 +270,8 @@ if st.session_state.get("logged_in"):
         st.markdown('</div>', unsafe_allow_html=True)
 # --------------- accuracy vs epoch ------------
 # Load user data
+user_id = st.session_state.get("user_email")
+
 if user_id:
     df = load_user_data(user_id)
 else:
