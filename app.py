@@ -293,13 +293,27 @@ if st.session_state.get("logged_in"):
                 history_data = json.load(f)
 
             epochs = history_data["epochs"]
+            train_acc = history_data["train_accuracy"]   
             val_acc = history_data["val_accuracy"]
 
             fig, ax = plt.subplots(figsize=(7,4))
-            ax.plot(epochs, val_acc, marker="o")
+
+            #  BOTH LINES
+            ax.plot(epochs, train_acc, marker="o", label="Train Accuracy")
+            ax.plot(epochs, val_acc, marker="o", label="Validation Accuracy")
+
+            #  LEGEND 
+            ax.legend()
+
+            # labels
+            ax.set_xlabel("Epochs")
+            ax.set_ylabel("Accuracy")
+            ax.set_title("Train vs Validation Accuracy")
+            ax.grid(True)
 
             best_idx = np.argmax(val_acc)
             ax.scatter(epochs[best_idx], val_acc[best_idx])
+            ax.text(epochs[best_idx], val_acc[best_idx], " Best", fontsize=10)
 
             st.pyplot(fig)
         else:
