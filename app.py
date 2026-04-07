@@ -27,55 +27,47 @@ st.set_page_config(
 st.markdown("""
 <style>
 
-/* BACKGROUND */
-.stApp {
+/* MAIN BACKGROUND */
+.main {
     background: linear-gradient(135deg, #141E30, #243B55);
+    color: #FFFFFF;
+}
+
+/* CARD DESIGN */
+.card {
+    background: #1F2937;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0px 4px 25px rgba(0,0,0,0.6);
+    margin-bottom: 20px;
+    color: #E5E7EB;  
 }
 
 /* TITLE */
 .title {
-    font-size: 48px;
-    font-weight: 700;
+    font-size: 45px;
+    font-weight: bold;
     text-align: center;
-    color: white;
-    margin-bottom: 30px;
-}
-
-/* CARD */
-.card {
-    background: rgba(255,255,255,0.05);
-    padding: 25px;
-    border-radius: 18px;
-    backdrop-filter: blur(10px);
-    box-shadow: 0px 6px 30px rgba(0,0,0,0.4);
-    margin-bottom: 25px;
+    color: #F9FAFB;  /*  CLEAR WHITE */
 }
 
 /* TEXT AREA */
 textarea {
-    background-color: #1e293b !important;
-    color: white !important;
+    background-color: #111827 !important;
+    color: #FFFFFF !important;
     border-radius: 10px !important;
 }
 
 /* BUTTON */
-div.stButton > button {
-    width: 100%;
-    border-radius: 10px;
-    height: 50px;
-    font-size: 16px;
-    background: linear-gradient(to right, #ff416c, #ff4b2b);
-    color: white;
-    border: none;
+button {
+    background-color: #3B82F6 !important;
+    color: white !important;
+    border-radius: 10px !important;
 }
 
-div.stButton > button:hover {
-    background: linear-gradient(to right, #ff4b2b, #ff416c);
-}
-
-/* SUCCESS BOX */
+/* SUCCESS / WARNING FIX */
 .stAlert {
-    border-radius: 10px;
+    color: black !important;
 }
 
 </style>
