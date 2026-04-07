@@ -38,7 +38,7 @@ st.markdown("""
     font-size: 48px;
     font-weight: 800;
     text-align: center;
-    color: blue;
+    color: SlateBlue;
     text-shadow: 0px 0px 15px rgba(255,255,255,0.3);
     margin-bottom: 10px;
 }
@@ -46,7 +46,7 @@ st.markdown("""
 /* SUBTITLE */
 .subtitle {
     text-align: center;
-    color: #9CA3AF;
+    color: SlateBlue;
     margin-bottom: 30px;
 }
 
