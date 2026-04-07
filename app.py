@@ -29,50 +29,71 @@ st.markdown("""
 
 /* MAIN BACKGROUND */
 .main {
-    background: linear-gradient(135deg, #141E30, #243B55);
-    color: #FFFFFF;
-}
-
-/* CARD DESIGN */
-.card {
-    background: #1F2937;
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0px 4px 25px rgba(0,0,0,0.6);
-    margin-bottom: 20px;
-    color: #E5E7EB;  
+    background: linear-gradient(135deg, #0f172a, #020617);
+    color: #E5E7EB;
 }
 
 /* TITLE */
 .title {
-    font-size: 45px;
-    font-weight: bold;
+    font-size: 48px;
+    font-weight: 800;
     text-align: center;
-    color: #F9FAFB;  /*  CLEAR WHITE */
+    color: #F9FAFB;
+    margin-bottom: 10px;
+}
+
+/* SUBTITLE */
+.subtitle {
+    text-align: center;
+    color: #9CA3AF;
+    margin-bottom: 30px;
+}
+
+/* CARD */
+.card {
+    background: #111827;
+    padding: 20px;
+    border-radius: 18px;
+    box-shadow: 0px 6px 30px rgba(0,0,0,0.6);
+    margin-bottom: 20px;
+    color: #E5E7EB;
 }
 
 /* TEXT AREA */
 textarea {
-    background-color: #111827 !important;
-    color: #FFFFFF !important;
-    border-radius: 10px !important;
+    background-color: #020617 !important;
+    color: #F9FAFB !important;
+    border-radius: 12px !important;
 }
 
 /* BUTTON */
-button {
-    background-color: #3B82F6 !important;
-    color: white !important;
-    border-radius: 10px !important;
+div.stButton > button {
+    background: linear-gradient(135deg, #6366F1, #3B82F6);
+    color: white;
+    border-radius: 12px;
+    height: 45px;
+    width: 100%;
+    font-size: 16px;
+    font-weight: 600;
 }
 
-/* SUCCESS / WARNING FIX */
+/* HOVER */
+div.stButton > button:hover {
+    background: linear-gradient(135deg, #4F46E5, #2563EB);
+}
+
+/* SECTION HEADINGS */
+h2, h3 {
+    color: #F9FAFB;
+}
+
+/* ALERT FIX */
 .stAlert {
-    color: black !important;
+    border-radius: 10px;
 }
 
 </style>
 """, unsafe_allow_html=True)
-
 # ---------------- LOAD MODEL ----------------
 @st.cache_resource
 def load_all():
@@ -240,7 +261,7 @@ elif menu == "Login":
 if st.session_state.get("logged_in"):
 
     st.markdown('<div class="title">🧠 Emotion Aware Diary</div>', unsafe_allow_html=True)
-
+    st.markdown('<div class="subtitle">Understand your emotions. Improve your life.</div>', unsafe_allow_html=True)
     user_id = st.session_state.get("user_email")
 
     if user_id:
@@ -282,42 +303,6 @@ if st.session_state.get("logged_in"):
             """, unsafe_allow_html=True)
 
     st.markdown('</div>', unsafe_allow_html=True)
-
-    # -------- ACCURACY GRAPH --------
-    st.subheader("📈 Model Accuracy over Epochs")
-
-    if st.button("Show Accuracy vs Epoch Graph"):
-
-        if os.path.exists("training_history.json"):
-            with open("training_history.json", "r") as f:
-                history_data = json.load(f)
-
-            epochs = history_data["epochs"]
-            train_acc = history_data["train_accuracy"]   
-            val_acc = history_data["val_accuracy"]
-
-            fig, ax = plt.subplots(figsize=(7,4))
-
-            #  BOTH LINES
-            ax.plot(epochs, train_acc, marker="o", label="Train Accuracy")
-            ax.plot(epochs, val_acc, marker="o", label="Validation Accuracy")
-
-            #  LEGEND 
-            ax.legend()
-
-            # labels
-            ax.set_xlabel("Epochs")
-            ax.set_ylabel("Accuracy")
-            ax.set_title("Train vs Validation Accuracy")
-            ax.grid(True)
-
-            best_idx = np.argmax(val_acc)
-            ax.scatter(epochs[best_idx], val_acc[best_idx])
-            ax.text(epochs[best_idx], val_acc[best_idx], " Best", fontsize=10)
-
-            st.pyplot(fig)
-        else:
-            st.warning("training_history.json not found")
 
     # -----------------load user data-------------------
     user_id = st.session_state.get("user_email", "")
@@ -464,3 +449,38 @@ if st.session_state.get("logged_in"):
                 ax.grid(True)
 
                 st.pyplot(fig)
+    # -------- ACCURACY GRAPH --------
+    st.subheader("📈 Model Accuracy over Epochs")
+
+    if st.button("Show Accuracy vs Epoch Graph"):
+
+        if os.path.exists("training_history.json"):
+            with open("training_history.json", "r") as f:
+                history_data = json.load(f)
+
+            epochs = history_data["epochs"]
+            train_acc = history_data["train_accuracy"]   
+            val_acc = history_data["val_accuracy"]
+
+            fig, ax = plt.subplots(figsize=(7,4))
+
+            #  BOTH LINES
+            ax.plot(epochs, train_acc, marker="o", label="Train Accuracy")
+            ax.plot(epochs, val_acc, marker="o", label="Validation Accuracy")
+
+            #  LEGEND 
+            ax.legend()
+
+            # labels
+            ax.set_xlabel("Epochs")
+            ax.set_ylabel("Accuracy")
+            ax.set_title("Train vs Validation Accuracy")
+            ax.grid(True)
+
+            best_idx = np.argmax(val_acc)
+            ax.scatter(epochs[best_idx], val_acc[best_idx])
+            ax.text(epochs[best_idx], val_acc[best_idx], " Best", fontsize=10)
+
+            st.pyplot(fig)
+        else:
+            st.warning("training_history.json not found")
