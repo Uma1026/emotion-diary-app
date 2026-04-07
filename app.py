@@ -38,7 +38,8 @@ st.markdown("""
     font-size: 48px;
     font-weight: 800;
     text-align: center;
-    color: #F9FAFB;
+    color: white;
+    text-shadow: 0px 0px 15px rgba(255,255,255,0.3);
     margin-bottom: 10px;
 }
 
@@ -61,9 +62,10 @@ st.markdown("""
 
 /* TEXT AREA */
 textarea {
-    background-color: #020617 !important;
-    color: #F9FAFB !important;
+    background-color: #111827 !important;
+    color: #FFFFFF !important;
     border-radius: 12px !important;
+    padding: 10px !important;
 }
 
 /* BUTTON */
@@ -261,6 +263,7 @@ elif menu == "Login":
 if st.session_state.get("logged_in"):
 
     st.markdown('<div class="title">🧠 Emotion Aware Diary</div>', unsafe_allow_html=True)
+    st.markdown("<br>", unsafe_allow_html=True)
     st.markdown('<div class="subtitle">Understand your emotions. Improve your life.</div>', unsafe_allow_html=True)
     user_id = st.session_state.get("user_email")
 
@@ -268,8 +271,6 @@ if st.session_state.get("logged_in"):
         df = load_user_data(user_id)
     else:
         df = pd.DataFrame()
-
-    st.markdown('<div class="card">', unsafe_allow_html=True)
 
     text = st.text_area("Write your thoughts", height=150)
 
