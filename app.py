@@ -23,26 +23,61 @@ st.set_page_config(
     layout="wide"
 )
 
-# ---------------- UI  ----------------
+# ---------------- UI CSS ----------------
 st.markdown("""
 <style>
-.main {
-    background-color: #0E1117;
-    color: white;
+
+/* BACKGROUND */
+.stApp {
+    background: linear-gradient(135deg, #141E30, #243B55);
 }
-.card {
-    background-color: #1c1f26;
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0px 4px 25px rgba(0,0,0,0.5);
-    margin-bottom: 20px;
-}
+
+/* TITLE */
 .title {
-    font-size: 45px;
-    font-weight: bold;
+    font-size: 48px;
+    font-weight: 700;
     text-align: center;
     color: white;
+    margin-bottom: 30px;
 }
+
+/* CARD */
+.card {
+    background: rgba(255,255,255,0.05);
+    padding: 25px;
+    border-radius: 18px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0px 6px 30px rgba(0,0,0,0.4);
+    margin-bottom: 25px;
+}
+
+/* TEXT AREA */
+textarea {
+    background-color: #1e293b !important;
+    color: white !important;
+    border-radius: 10px !important;
+}
+
+/* BUTTON */
+div.stButton > button {
+    width: 100%;
+    border-radius: 10px;
+    height: 50px;
+    font-size: 16px;
+    background: linear-gradient(to right, #ff416c, #ff4b2b);
+    color: white;
+    border: none;
+}
+
+div.stButton > button:hover {
+    background: linear-gradient(to right, #ff4b2b, #ff416c);
+}
+
+/* SUCCESS BOX */
+.stAlert {
+    border-radius: 10px;
+}
+
 </style>
 """, unsafe_allow_html=True)
 
@@ -227,7 +262,7 @@ if st.session_state.get("logged_in"):
 
     if st.button("✨ Analyze Emotion"):
 
-        if not user_id:
+        if not st.session_state.get("logged_in"):
             st.warning("Login required")
 
         elif text.strip() == "":
